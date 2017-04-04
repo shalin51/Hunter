@@ -4,9 +4,21 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Add Input">
+<ion-view view-title="Add Model">
   <ion-content class="padding">
-   <a href="#/tab/input/add"> another test</a>
+    <div class="list">
+      <label class="item item-input item-stacked-label" >
+        <span class="input-label">Model Name</span>
+        <input type="text" placeholder="Enter Model Name">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Model Description</span>
+        <textarea placeholder="Description (Optional)"></textarea>
+      </label>
+      <button class="button button-full button-positive"> Submit</button>
+</div>
+
+   <a href="#/tab/input/add"> test</a>
     Shalin is this
   </ion-content>
 </ion-view>

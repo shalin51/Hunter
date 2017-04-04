@@ -7,8 +7,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope, $timeout, $ionicHistory) {
   $ionicPlatform.ready(function() {
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -44,7 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-model': {
         templateUrl: 'templates/tab-model.html',
-        
+        controller: 'ModelCtrl'
       }
     }
   })
@@ -53,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-model': {
         templateUrl: 'templates/add-model.html',
-        
+        controller: 'ModelCtrl'
       }
     }
   })
@@ -62,7 +63,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-model': {
         templateUrl: 'templates/update-model.html',
-        
+        controller: 'ModelCtrl'
       }
     }
   })
@@ -71,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-model': {
         templateUrl: 'templates/list-model.html',
-        
+        controller: 'ModelCtrl'
       }
     }
   })
@@ -80,7 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-model': {
         templateUrl: 'templates/delete-model.html',
-        
+        controller: 'ModelCtrl'
       }
     }
   })
@@ -89,7 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-concept': {
         templateUrl: 'templates/tab-concept.html',
-        
+        controller: 'ConceptCtrl'
       }
     }
   })
@@ -98,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-concept': {
         templateUrl: 'templates/add-concept.html',
-        
+        controller: 'ConceptCtrl'
       }
     }
   })
@@ -107,7 +108,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-concept': {
         templateUrl: 'templates/update-concept.html',
-        
+        controller: 'ConceptCtrl'
       }
     }
   })
@@ -116,7 +117,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-concept': {
         templateUrl: 'templates/list-concept.html',
-        
+        controller: 'ConceptCtrl'
       }
     }
   })
@@ -125,7 +126,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-concept': {
         templateUrl: 'templates/delete-concept.html',
-        
+        controller: 'ConceptCtrl'
       }
     }
   })
@@ -133,7 +134,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/input',
     views: {
       'tab-input': {
-        templateUrl: 'templates/tab-input.html',        
+        templateUrl: 'templates/tab-input.html',      
+         controller: 'InputCtrl'  
       }
     }
   })
@@ -142,7 +144,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-input': {
         templateUrl: 'templates/add-input.html',
-        
+         controller: 'InputCtrl'        
       }
     }
   })
@@ -151,7 +153,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-input': {
         templateUrl: 'templates/update-input.html',
-        
+         controller: 'InputCtrl'        
       }
     }
   })
@@ -160,7 +162,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-input': {
         templateUrl: 'templates/list-input.html',
-        
+         controller: 'InputCtrl'
       }
     }
   })
@@ -169,11 +171,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     views: {
       'tab-input': {
         templateUrl: 'templates/delete-input.html',
-        
+         controller: 'InputCtrl'
       }
     }
-  });
+  })
+.state('tab.predict', {
+    url: '/predict',
+    views: {
+      'tab-predict': {
+        templateUrl: 'templates/tab-predict.html',
+        controller:'PredicateCtrl'        
+      }
+    }
+  })
+  .state('tab.predict-show', {
+    url: '/predict/show',
+    views: {
+      'tab-predict': {
+        templateUrl: 'templates/show-predict.html',      
+        controller:'PredicateCtrl'  
+      }
+    }
+  })
 
+    
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/model');
 
