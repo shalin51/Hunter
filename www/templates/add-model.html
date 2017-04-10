@@ -9,16 +9,25 @@
     <div class="list">
       <label class="item item-input item-stacked-label" >
         <span class="input-label">Model Name</span>
-        <input type="text" placeholder="Enter Model Name">
+        <input type="text" placeholder="Enter Model Name" ng-model="model.modelName">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Model Description</span>
-        <textarea placeholder="Description (Optional)"></textarea>
+        <textarea placeholder="Description (Optional)" ng-model="model.description"></textarea>
       </label>
-      <button class="button button-full button-positive"> Submit</button>
-</div>
+      
+      <button class="button button-full button-positive" ng-click="OnAdd(model)"> Submit</button>
+   </div>
 
-   <a href="#/tab/input/add"> test</a>
-    Shalin is this
+
+<ul class="list" >
+<li class="item item-checkbox" ng-repeat="concept in conceptList" >
+  {{concept.name}}
+   <label class="checkbox">
+   <input type="checkbox" ng-model="concept.selected">
+   </label>
+</li>
+</ul>
+
   </ion-content>
 </ion-view>

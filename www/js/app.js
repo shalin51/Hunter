@@ -85,6 +85,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
+  .state('tab.model-train', {
+    url: '/model/train',
+    views: {
+      'tab-model': {
+        templateUrl: 'templates/train-model.html',
+        controller: 'ModelCtrl'
+      }
+    }
+  })
   .state('tab.concept', {
     url: '/concept',
     views: {

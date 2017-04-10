@@ -5,7 +5,7 @@
               <div class="col col-20">Enter URL</div> 
                 <div class="col col-80">
                   <label class="item item-input">
-                    <input type="text" placeholder="Enter URL" ng-model="imgURL">
+                    <input type="text" placeholder="Enter URL" ng-model="inputImage" ng-value="inputImage"></input>
                   </label>
                 </div>                  
             </div>
@@ -14,16 +14,15 @@
               <div class="input-label">
                 Select Model
               </div>
-              <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
-                <option ng-repeat="option in data.availableOptions" value="{{option}}">{{option.name}}</option>
+              <select name="repeatSelect" id="repeatSelect" ng-model="selectedConcept" ng-options="concept.name for concept in conceptList">
               </select>
             </label>
 
              <div class="item item-body">      
-                  <img class="full-image" ng-src="https://cdn.pixabay.com/photo/2014/12/22/10/04/lion-577104_960_720.jpg">     
+                  <img class="full-image" ng-src="">     
              </div>
-             <a class="button button-block button-positive" href="#/tab/predict/show" ng-click="Predict()">
-              <i class="icon ion-music-note"></i>
+             <a class="button button-block button-positive" href="#/tab/predict/show" ng-click="Predict(inputImage)">
+              <i class="icon ion-ios-lightbulb"> </i>
               Predict
             </a>
        </div>

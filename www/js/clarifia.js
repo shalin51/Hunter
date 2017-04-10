@@ -16,8 +16,10 @@ function createInput(){
             { "id": "car", "value": false },
             { "id": "printer", "value": true },
             { "id": "horse", "value": false },
-        ]
+        ],
+         metadata: {name: 'id001', type: 'plants', size: 100}
     },
+   
     {
       url: "https://http2.mlstatic.com/impresora-todo-en-uno-hp-officejet-4500-nueva-y-sellada-D_NQ_NP_314911-MLC20675920745_042016-O.jpg",
       id: 'printer2',
@@ -102,9 +104,10 @@ function createInput(){
 
   // once inputs are created, create model by giving name and list of concepts
 function createModel(Model) {
-  clarifiaApp.models.create('TestModel', ["car", "printer","horse"]).then(
+  clarifiaApp.models.create(Model.modelName, Model.concepts).then(
     function(response) {
       console.log(response);
+      alert("Model Created Succesfully");
     },
     function(err) {
       console.log(err);
@@ -123,10 +126,11 @@ function trainModel(modelId) {
   );
 }
 
-function Predict(modelId,img){
+function PredictModel(modelId,img,callback){
     clarifiaApp.models.predict(modelId,img).then(
    function(response) {
       console.log(response);
+      callback(response);
     },
     function(err) {
       console.log(err);
@@ -134,7 +138,18 @@ function Predict(modelId,img){
   );
 }
 
+function GetAllModels(callback){
+clarifiaApp.models.list().then(
+    function(response) {
+      callback(response);
+    },
+    function(err) {
+      callback(err);
+    }
+  );
+}
+
 //createInput();
 //createModel("");
 //trainModel("TestModel");
-//Predict("TestModel","http://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c04895834.png");
+

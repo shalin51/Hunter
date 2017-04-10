@@ -6,7 +6,13 @@
 -->
 <ion-view view-title="Add Concept">
   <ion-content class="padding">
-  
-    Shalin is this
+  <div class="list">
+      <label class="item item-input item-stacked-label" >
+        <span class="input-label">Concept Name</span>
+        <input type="text" placeholder="Enter Concept Name" ng-model="concept">
+      </label>
+      <button class="button button-full button-positive" ng-click="OnAdd(concept)"> Submit</button>
+   </div>
+   
   </ion-content>
 </ion-view>

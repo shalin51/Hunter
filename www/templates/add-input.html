@@ -6,7 +6,14 @@
 -->
 <ion-view view-title="Add Input">
   <ion-content class="padding">
-   <a href="#/tab/input/add"> another test</a>
-    Shalin is this
+    
+   <div ng-repeat="item in inputs">
+                <input ng-model="item.value" />
+                
+                <button ng-click="getValue(item)">get input value</button>
+            </div>
+    </div>
+    <button ng-click="addfield()">Add field</button>
+
   </ion-content>
 </ion-view>

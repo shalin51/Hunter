@@ -1,26 +1,19 @@
 <ion-view view-title="Predict">
   <ion-content>
     <ion-list>
+      
         <div class="list card">
-          <div class="item item-avatar">
-            <img ng-src="http://www.planwallpaper.com/static/images/434976-happy-valentines-day-timeline-cover.jpg">
-            <h2>Marty McFly</h2>
-            <p>November 05, 1955</p>
+          <div class="item item-body" >
+            <img class="imgPredict" ng-src="{{link}}"/>
           </div>
-
-          <div class="item item-body">
-            <img class="imgPredict" ng-src="http://www.planwallpaper.com/static/images/434976-happy-valentines-day-timeline-cover.jpg">
-            <p>
-              This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-              the content is from a card-body consisting of an image and paragraph text. The footer
-              consists of tabs, icons aligned left, within the card-footer.
-            </p>
-            <p>
-              <a href="#" class="subdued">1 Like</a>
-              <a href="#" class="subdued">5 Comments</a>
-            </p>
-          </div>
+            <li ng-repeat="result in results">
+              <a href="#" class="subdued">{{result.name}}</a>
+              <a href="#" class="subdued">{{result.confedence}}%</a>
+            </li>       
       </div>
+
+      
+
     <ion-list>
   </ion-content>
 </ion-view>
