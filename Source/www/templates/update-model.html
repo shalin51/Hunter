@@ -6,7 +6,7 @@
 -->
 <ion-view view-title="Update model">
   <ion-content class="padding">
-    <div class="list">
+    <div class="list" id="mainDiv" ng-show="topPanel" >
       <label class="item item-input item-select">
         <div class="input-label">
           Model
@@ -17,28 +17,27 @@
           <option>Red</option>
         </select>
       </label>
-      <button class="button button-full button-calm"> Edit</button>
+      <button class="button button-full button-calm" ng-model="showEditPanel" aria-label="Toggle ngHide" ng-click="UpdateModelEditClicked(showEditPanel)"> Edit</button>
    </div>
-    <div class="list">
+    <div class="list check-element" ng-show="showEditPanel" id='div'>
       <label class="item item-input item-stacked-label">
         <div class="input-label">
-           <span class="input-label">Model Name</span>
-           <input type="text" placeholder="Enter Model Name">
+           <span class="input-label modelLAble"><b>Model</b></span>
         </div>
       </label>
-    </div>  
-
-   <ion-list>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Model Description</span>
+            <input placeholder="Enter Description" ng-model="model.Description"></input>
+        </label>
+        <label class="item item-input item-stacked-label">
+            <span class="input-label">Model URL</span>
+            <input placeholder="Enter URL" ng-model="model.Description"></input>
+        </label>
     <ion-checkbox ng-model="filter.red">Red</ion-checkbox>
     <ion-checkbox ng-model="filter.yellow">Yellow</ion-checkbox>
     <ion-checkbox ng-model="filter.pink">Pink</ion-checkbox>
-  </ion-list>
- <div class="list">
-
-      <button class="button button-full button-positive"> Save</button>
-      <button class="button button-full button-assertive"> Cancle</button>
+      <button class="button button-full button-positive" ng-click="UpdateModelSaveClicked()"> Save</button>
+      <button class="button button-full button-assertive" ng-click="UpdateModelCancleClicked"> Cancle</button>
     </div>
-   <a href="#/tab/test/1"> test</a>
-    Shalin is this
   </ion-content>
 </ion-view>

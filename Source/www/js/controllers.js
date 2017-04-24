@@ -1,11 +1,38 @@
-var app=angular.module('starter.controllers', [])
+var app=angular.module('starter.controllers', ['ionic'])
+.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(5);
+$ionicConfigProvider.tabs.position("bottom");
+  // note that you can also chain configs
+  
+})
+.controller('ModelCtrl', function($scope, $rootScope, $timeout, $ionicHistory,$ionicPopup, $state) {
 
-.controller('ModelCtrl', function($scope, $rootScope, $timeout, $ionicHistory) {
- $scope.conceptList= GetAllConcepts();
- $scope.selectedConceptForModel = $scope.conceptList[0];
+   $scope.$on('$ionicView.enter', function(e) {
+     $scope.showHide=false;
+     $scope.topPanel=true;
+    });
 
+$scope.conceptList=[];
+ GetAllConcepts("Shalin",function(data){
+    if(data!=undefined)
+    {
+      data.forEach(function(data){
+            var concept= {name:data}
+            $scope.conceptList.push(concept);
+      })
+      $scope.selectedConceptForModel = $scope.conceptList[0];
+    }
+  });
+  $scope.modelList=[];
+GetAllModels("Shalin",function(data){
+    if(data!=undefined)
+    {
+      data.forEach(function(data){      
+            $scope.modelList.push(data);
+      })
+    }
+  });
 $scope.OnDelete=function(modelName){
-$scope.modelList=ary.remove(modelName);
 }
 
 $scope.OnAdd=function(model){
@@ -30,82 +57,173 @@ $scope.OnList=function(model){
      GetAllModels(function(data){
           console.log(data);
      });
-     
-      $scope.modelList=[
-      'travel-v1.0',
-      'apparel',
-      'celeb-v1.3',
-      'face-v1.3',
-    ]
 }
-})
-.controller('ConceptCtrl', function($scope) {
+//Update Model
+$scope.UpdateModelSaveClicked=function(){
+ var confirmPopup = $ionicPopup.confirm({
+         title: 'Update Model',
+         template: 'Are you sure to update Model?'
+      });
 
-  $scope.OnDelete=function(modelName){
+      confirmPopup.then(function(res) {
+         if(res) {
+           alert("Model Updated Successfuly");
+           $state.go('tab.model');
+         }
+      });
+}
+$scope.UpdateModelCancleClicked=function(){
   
 }
+$scope.UpdateModelEditClicked=function(showEditPanel){
+  
+  var div = angular.element( document.querySelector( '#div' ) );
+  div.addClass('animate-show-hide');
+   $scope.showEditPanel=true;
+   $scope.topPanel=false;
+}
+ 
+//Train Model
+$scope.OnTrainModel=function(model){
+  $scope.svg=true;
+  setTimeout(function(){
+        $scope.svg=false;
+        alert("Model Trained Successfully")
+        angular.element(document.querySelector('#svgDiv')).style.visibility = "hidden"; 
+      },500)
+      trainModel(model);
+}
+})
 
-$scope.OnAdd=function(concept){
-  writeConceptData('Shalin',concept);
-  $scope.concept="";
+.controller('ConceptCtrl', function($scope,$ionicPopup,$state) {
+  $scope.OnDelete=function(modelName){
 }
 
-$scope.OnUpdate=function(concept){
- 
+$scope.conceptList=[];
+ GetAllConcepts("Shalin",function(data){
+    if(data!=undefined)
+    {
+      data.forEach(function(data){
+            var concept= {name:data}
+            $scope.conceptList.push(concept);
+      })
+    }
+  });
+
+
+$scope.OnAdd=function(concept){
+  //writeConceptData('Shalin',concept);
+  $scope.concept="";
+  var confirmPopup = $ionicPopup.confirm({
+         title: 'Add Concept',
+         template: "Sure to Add "+concept+" concept?"
+      });
+
+      confirmPopup.then(function(res) {
+         if(res) {
+            writeConceptData("Shalin",concept);
+           alert("Concept "+ concept+ " Added Sucessfully");
+           $state.go('tab.concept');
+         }
+      });
+     
+}
+
+//Update Concept
+$scope.ConceptEditClicked=function(){
+ $scope.showEditPanel=true;
+}
+
+$scope.ConceptDeleteClicked=function(concept){
+ var confirmPopup = $ionicPopup.confirm({
+         title: 'Delete Concept',
+         template: "Sure to Delete "+concept+" concept?"
+      });
+      confirmPopup.then(function(res) {
+         if(res) {
+           alert("Concept "+ concept+ " Deleted Sucessfully");
+           $state.go('tab.concept');
+         }
+      });
+}
+
+$scope.UpdateConceptSaveClicked=function(conceptName){
+  var confirmPopup = $ionicPopup.confirm({
+         title: 'Edit Concept',
+         template: "Sure to Edit "+conceptName+" concept?"
+      });
+
+      confirmPopup.then(function(res) {
+         if(res) {
+           alert("Concept "+ conceptName+ " Updated Sucessfully");
+           $state.go('tab.concept');
+         }
+      });
 }
 
 $scope.OnList=function(concept){
-   getConceptData('Shalin',function(concepts,numberChilder){
-     var count=1;
-     if(concepts.length==0)
-     {
-        count=1;
-       
-     }  
-     else
-     {
-        count=concepts.length;   
-     }  
-   });
-}
   
+}
 })
 
-.controller('InputCtrl', function($scope, $stateParams, Chats) {
+.controller('InputCtrl', function($scope, $stateParams) {
+   $scope.$on('$ionicView.enter', function(e) {
+        $scope.conceptList= [];  
+        GetAllConcepts("Shalin",function(data){
+          if(data!=undefined)
+          {
+            data.forEach(function(data){
+                  var concept= {name:data}
+                  $scope.conceptList.push(concept);
+            })
+          }
+        });                       
+    });
+
   $scope.OnDelete=function(modelName){
-  $scope.modelList=ary.remove(modelName);
 }
 
  $scope.inputs = [];
+ $scope.id=0;
     $scope.addfield = function () {
+      $scope.id=$scope.id+1;
         $scope.inputs.push({})
     }
-    $scope.getValue = function (item) {
-        alert(item.value)
+    $scope.getValue = function (input) {
+        alert(input)
     }
 
+    $scope.GetValues=function(input){
+      for (var i=0;i<input.length;i++){
+        alert(input[i]);
+      }
+    }
 $scope.OnAdd=function(model){
-  $scope.modelList=ary.remove(modelName);
+
 }
 
 $scope.OnUpdate=function(model){
-  $scope.modelList=ary.remove(modelName);
+  
 }
 
 $scope.OnList=function(model){
-      $scope.modelList=[
-      'Animal',
-      'General',
-      'Shalin',
-      'Test'
-    ]
+   
 }
 })
 .controller('PredicateCtrl', function($scope, $timeout) {
 
     $scope.$on('$ionicView.enter', function(e) {
-      debugger;
-        $scope.conceptList= GetAllConcepts();
+       $scope.conceptList=[];
+ GetAllConcepts("Shalin",function(data){
+    if(data!=undefined)
+    {
+      data.forEach(function(data){
+            var concept= {name:data}
+            $scope.conceptList.push(concept);
+      })
+      $scope.selectedConceptForModel = $scope.conceptList[0];
+    }
+  });
           $scope.selectedConcept = $scope.conceptList[0];                 
            $timeout(updateView, 50);                  
     });
@@ -145,16 +263,7 @@ $scope.Predict=function(inputImage){
 
 })
 
-Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
-    while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
-    }
-    return this;
-};
+
 
 
 

@@ -11,13 +11,14 @@
         <div class="input-label">
           Model
         </div>
-        <select>
-          <option>Blue</option>
-          <option selected>Green</option>
-          <option>Red</option>
-        </select>
+       <select ng-model="selectedmodel" >
+           <option ng-selected="{{modelList[1].modelName}}" ng-repeat="model in modelList" value="{{model.modelName}}">{{model.modelName}}</option>
+      </select>
       </label>
-      <button class="button button-full button-calm">Train</button>
+      <button class="button button-full button-calm" ng-click="OnTrainModel(selectedmodel)">Train</button>
+     <div class="svgClass" ng-show="svg" id="svgDiv">
+         <img class="title-image" src="../img/hourglass.svg" width="123" height="43" />
+     </div>
    </div>
   </ion-content>
 </ion-view>

@@ -6,16 +6,22 @@
 -->
 <ion-view view-title="List model">
   <ion-content class="padding">
-   <div class="list">
-
-    <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
-      <h2>Model Name</h2>
-      <p>Model Description</p>
-    </a>
-    
-</div>
-   <a href="#/tab/test/1"> another test</a>
-    Shalin is this
+       <ion-list show-delete="false" can-swipe="true">
+                    <ion-item href="#" >
+                        Item 1
+                        <ion-option-button class="button-light icon ion-edit" ng-click="ConceptEditClicked()"></ion-option-button>
+                        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="ConceptDeleteClicked(concept)" ></ion-option-button>
+                    </ion-item>
+                    <div class="list check-element" ng-show="showEditPanel" id='div'>
+                      <label class="item item-input item-stacked-label">
+                        <div class="input-label">
+                          <input type="text" ng-model="conceptName" placeholder="Enter Concept Name"/>
+                        </div>
+                      </label>                                     
+                      <button class="button button-full button-positive" ng-click="UpdateConceptSaveClicked(conceptName)"> Save</button>
+                      <button class="button button-full button-assertive" ng-click="UpdateConceptCancleClicked(conceptName)"> Cancle</button>
+                  </div>
+                </ion-list>
+   
   </ion-content>
 </ion-view>
