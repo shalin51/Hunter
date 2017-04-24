@@ -15,26 +15,19 @@
         <span class="input-label">Model Description</span>
         <textarea placeholder="Description (Optional)" ng-model="model.description"></textarea>
       </label>
-      <br>
-
-      <ul class="list" >
-          <li class="item item-checkbox" ng-repeat="concept in conceptList" >
-            {{concept.name}}
-            <label class="checkbox">
-              <input type="checkbox" ng-model="concept.selected">
-            </label>
-          </li>
-      </ul>
-      <br>
-       <label class="item item-input item-stacked-label">
-        <span class="input-label">Model Description</span>
-        <input placeholder="Enter URL" ng-model="model.ImageUrl"></textarea>
-      </label>
+      
       <button class="button button-full button-positive" ng-click="OnAdd(model)"> Submit</button>
    </div>
 
 
-
+<ul class="list" >
+<li class="item item-checkbox" ng-repeat="concept in conceptList" >
+  {{concept.name}}
+   <label class="checkbox">
+   <input type="checkbox" ng-model="concept.selected">
+   </label>
+</li>
+</ul>
 
   </ion-content>
 </ion-view>

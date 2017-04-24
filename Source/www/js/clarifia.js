@@ -7,13 +7,13 @@ var clarifiaApp = new Clarifai.App(
     ClientSecret
   );
 
-function createInput(input){
+function createInput(){
  clarifiaApp.inputs.create([
     {
-      url: input.url,
-      id: input.id,
+      url: "https://i5.walmartimages.com/asr/609e5278-9d4e-4ef4-9858-37823acac707_1.127d4ce56406fdcfb892cdc79dc15276.jpeg",
+      id: 'printer1',
       concepts: [
-            { "id": input.concept.id, "value": input.concept.value },
+            { "id": "car", "value": false },
             { "id": "printer", "value": true },
             { "id": "horse", "value": false },
         ],
@@ -138,6 +138,16 @@ function PredictModel(modelId,img,callback){
   );
 }
 
+function GetAllModels(callback){
+clarifiaApp.models.list().then(
+    function(response) {
+      callback(response);
+    },
+    function(err) {
+      callback(err);
+    }
+  );
+}
 
 //createInput();
 //createModel("");

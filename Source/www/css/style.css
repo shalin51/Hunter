@@ -5,31 +5,3 @@
     width: 40%;
     height: 30%
 }
-
-.animate-show-hide.ng-hide {
-  opacity: 0;
-}
-
-.animate-show-hide.ng-hide-add,
-.animate-show-hide.ng-hide-remove {
-  transition: all linear 0.5s;
-}
-
-.check-element {
-  border: 1px solid green;
-  opacity: 1;
-  padding: 10px;
-}
-
-.modelLAble{
-        color: darkmagenta;
-         font-family: sans-serif;
-}
-.svgClass{
-  position: absolute;
-  z-index: 15;
-  left: 40%;
-}
-.padder{
-        margin-top: 10px;
-}
