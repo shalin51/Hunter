@@ -1,4 +1,4 @@
-var app=angular.module('starter.controllers', ['ionic'])
+var app=angular.module('starter.controllers', ['ionic', 'ngCordova'])
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.views.maxCache(5);
 $ionicConfigProvider.tabs.position("bottom");
@@ -210,7 +210,7 @@ $scope.OnList=function(model){
    
 }
 })
-.controller('PredicateCtrl', function($scope, $timeout) {
+.controller('PredicateCtrl', function($scope, $timeout, $cordovaCamera) {
 
     $scope.$on('$ionicView.enter', function(e) {
        $scope.conceptList=[];
@@ -241,25 +241,45 @@ $scope.OnList=function(model){
    $scope.link = 'https://farm4.staticflickr.com/3261/2801924702_ffbdeda927_d.jpg';
       }
 
-var GetNameAndConfedence=function(data){
-  var results=[];
-  var count=data.outputs[0].data.concepts.length;
-  
-    for(var i=0;i<count;i++){
-      var result={
-      name:data.outputs[0].data.concepts[i].name,
-      confedence:(data.outputs[0].data.concepts[i].value*100)
-    }
-  results.push(result);
-  }
-return results;
-}
+    var GetNameAndConfedence=function(data){
+      var results=[];
+      var count=data.outputs[0].data.concepts.length;
 
-$scope.Predict=function(inputImage){
-  var selectedConcept=$scope.selectedConcept.name;
-  localStorage.setItem("imgLink", inputImage);  
-  localStorage.setItem("selectedConcept", selectedConcept);
-}
+        for(var i=0;i<count;i++){
+          var result={
+          name:data.outputs[0].data.concepts[i].name,
+          confedence:(data.outputs[0].data.concepts[i].value*100)
+        }
+      results.push(result);
+      }
+    return results;
+    }
+
+    $scope.Predict=function(inputImage){
+      var selectedConcept=$scope.selectedConcept.name;
+      localStorage.setItem("imgLink", inputImage);  
+      localStorage.setItem("selectedConcept", selectedConcept);
+    }
+
+    $scope.takePicture = function() {
+            var options = { 
+                quality : 75, 
+                destinationType : Camera.DestinationType.DATA_URL, 
+                sourceType : Camera.PictureSourceType.CAMERA, 
+                allowEdit : true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 300,
+                targetHeight: 300,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            }, function(err) {
+                // An error occured. Show a message to the user
+            });
+        }
 
 })
 
