@@ -210,7 +210,7 @@ $scope.OnList=function(model){
    
 }
 })
-.controller('PredicateCtrl', function($scope, $timeout, $cordovaCamera) {
+.controller('PredicateCtrl', function($scope, $timeout, $rootScope, $cordovaCamera) {
     $scope.image = {};
     $scope.$on('$ionicView.enter', function(e) {
        $scope.conceptList=[];
@@ -225,7 +225,7 @@ $scope.OnList=function(model){
     }
   });
           $scope.selectedConcept = $scope.conceptList[0];                 
-           $timeout(updateView, 50);                  
+          $timeout(updateView, 50);  
     });
 
   var updateView=function(){
@@ -253,9 +253,10 @@ $scope.OnList=function(model){
         }
       results.push(result);
       }
-    return results;
-    }
+      $scope.results=results;
+      $rootScope.$apply();
 
+}
     $scope.Predict=function(){
       
       var selectedConcept=$scope.image.selectedConcept.name;
