@@ -211,7 +211,7 @@ $scope.OnList=function(model){
 }
 })
 .controller('PredicateCtrl', function($scope, $timeout, $cordovaCamera) {
-
+    $scope.image = {};
     $scope.$on('$ionicView.enter', function(e) {
        $scope.conceptList=[];
  GetAllConcepts("Shalin",function(data){
@@ -230,9 +230,10 @@ $scope.OnList=function(model){
 
   var updateView=function(){
                 var inputImage=localStorage.getItem("imgLink");
+                var strippedInputImage = inputImage.split(',')[1];
                 $scope.link = inputImage;
                 var selectedConcept=localStorage.getItem("selectedConcept");
-                PredictModel(selectedConcept,inputImage,function(res){
+                PredictModel(selectedConcept,strippedInputImage,function(res){
                 $scope.results= GetNameAndConfedence(res);
                });
   }
@@ -255,9 +256,18 @@ $scope.OnList=function(model){
     return results;
     }
 
-    $scope.Predict=function(inputImage){
-      var selectedConcept=$scope.selectedConcept.name;
-      localStorage.setItem("imgLink", inputImage);  
+    $scope.Predict=function(){
+      
+      var selectedConcept=$scope.image.selectedConcept.name;
+      var inputImage = $scope.image.inputImage;
+      var userImage = $scope.image.userImage;
+      var imageURI = $scope.imgURI;
+      if (inputImage) {
+          localStorage.setItem("imgLink", inputImage);
+      }
+      if (imageURI) {
+          localStorage.setItem("imgLink", imageURI);
+      } 
       localStorage.setItem("selectedConcept", selectedConcept);
     }
 
