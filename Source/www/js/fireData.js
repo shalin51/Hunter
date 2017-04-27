@@ -25,7 +25,7 @@ var config = {
 var database = firebase.database();
 
 function writeModelData(userID,model) {
-  firebase.database().ref('users/' + "Shalin"+'/models/').push({
+  firebase.database().ref('users/' + "Shalin"+'/model/').push({
     modelName: model.modelName,
     description: model.description,
     concepts : model.concepts
@@ -53,7 +53,7 @@ function GetAllConcepts(userID,callback) {
   });
 }
 function GetAllModels(userID,callback) {
-  firebase.database().ref('users/' + "Shalin"+'/models/').once('value').then(function(snapshot) {
+  firebase.database().ref('users/' + "Shalin"+'/model/').once('value').then(function(snapshot) {
   var models = snapshot.val();
   var keys=[];
   var modelList=[];
