@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', ['ionic', 'ngCordova'])
+var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlechart'])
     .config(function ($ionicConfigProvider) {
         $ionicConfigProvider.views.maxCache(5);
         $ionicConfigProvider.tabs.position("bottom");
@@ -228,7 +228,7 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova'])
             $scope.link = inputImage;
             if (inputImage.startsWith("data")) {
                 inputImage = inputImage.split(',')[1];
-            }            
+            }
             var selectedConcept = localStorage.getItem("selectedConcept");
             PredictModel(selectedConcept, inputImage, function (res) {
                 $scope.results = GetNameAndConfedence(res);
@@ -241,18 +241,44 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
         var GetNameAndConfedence = function (data) {
             var results = [];
+            
+            var chartArray = [];
             var count = data.outputs[0].data.concepts.length;
-
             for (var i = 0; i < count; i++) {
+                var arr = [];
                 var result = {
                     name: data.outputs[0].data.concepts[i].name,
                     confedence: (data.outputs[0].data.concepts[i].value * 100)
                 }
+                arr.push({v:data.outputs[0].data.concepts[i].name});
+                arr.push({v:data.outputs[0].data.concepts[i].value});
+                chartArray.push({c: arr});
                 results.push(result);
             }
             $scope.results = results;
-            $rootScope.$apply();
+            $scope.chart = {};
+            $scope.chart.type = "PieChart";
+            
+            $scope.chart.data = {
+                "cols": [
+                    {
+                        id: "t",
+                        label: "Concept",
+                        type: "string"
+                    },
+                    {
+                        id: "s",
+                        label: "Percent Confidence",
+                        type: "number"
+                    }
+                ],
+                "rows": chartArray     
+            };
+            $scope.chart.options = {
+                'title': 'Results'
+            };
 
+            $rootScope.$apply();
         }
         $scope.Predict = function () {
 
