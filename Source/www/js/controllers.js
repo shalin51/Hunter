@@ -233,6 +233,7 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
             PredictModel(selectedConcept, inputImage, function (res) {
                 $scope.results = GetNameAndConfedence(res);
             });
+            $scope.prediction = localStorage.getItem("prediction");
         }
 
         $scope.changeLink = function () {
@@ -241,7 +242,6 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
 
         var GetNameAndConfedence = function (data) {
             var results = [];
-            
             var chartArray = [];
             var count = data.outputs[0].data.concepts.length;
             for (var i = 0; i < count; i++) {
@@ -257,7 +257,8 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
             }
             $scope.results = results;
             $scope.chart = {};
-            $scope.chart.type = "PieChart";
+            $scope.chart.type = "BarChart";
+            localStorage.setItem("prediction", results[0].name);
             
             $scope.chart.data = {
                 "cols": [

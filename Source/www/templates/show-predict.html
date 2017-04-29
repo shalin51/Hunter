@@ -1,20 +1,22 @@
 <ion-view view-title="Predict">
-  <ion-content>
-    <ion-list>
-      
-        <div class="list card">
-          <div class="item item-body" >
-            <img class="imgPredict" ng-src="{{link}}"/>
-          </div>
-            <li ng-repeat="result in results">
-              <a href="#" class="subdued">{{result.name}}</a>
-              <a href="#" class="subdued">{{result.confedence}}%</a>
-            </li>
-            <div google-chart chart="chart" style="height:300px; width:100%;"></div>
-      </div>
+    <ion-content>
+        <ion-list>
 
-      
-
-    <ion-list>
-  </ion-content>
+            <div class="list card">
+                <div class="item item-body">
+                    <img class="imgPredict" ng-src="{{link}}" />
+                </div>
+                <li ng-repeat="result in results">
+                    <a href="#" class="subdued">{{result.name}}</a>
+                    <a href="#" class="subdued">{{result.confedence}}%</a>
+                </li>              
+            </div>
+            <div>
+                <h3>The predicted image is {{prediction}}</h3>
+            </div>
+        </ion-list>
+        
+            
+             <div google-chart chart="chart" style="height:300px; width:100%;"></div>
+    </ion-content>   
 </ion-view>
