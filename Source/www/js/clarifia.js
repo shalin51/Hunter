@@ -1,6 +1,6 @@
 
-var ClientId='IBjIUxK1sIfcYH9X-kqUc9YtvfYJqXNSARLZ2erX';
-var ClientSecret='_1lNocq8FMBOtHIvI2jH4X2wifZU7UfVdF7GKFSP';
+var ClientId='-wG29xrigkD5OpM0bLP40H-8b_DKWHwEi8fu47FL';
+var ClientSecret='_bOrcD4xwF6Jj4dP4TrPXbbZk3fqadhgrpqrS6jf';
 
 var clarifiaApp = new Clarifai.App(
     ClientId,
