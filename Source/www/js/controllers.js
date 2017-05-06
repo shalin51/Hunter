@@ -45,6 +45,17 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
             model.concepts = selectedConcept;
             createModel(model);
             writeModelData("Shalin", model);
+            var confirmPopup = $ionicPopup.confirm({
+         title: 'Add Model',
+         template: 'Are you sure to Add Model?'
+      });
+
+      confirmPopup.then(function(res) {
+         if(res) {
+           alert("Model Added Successfuly");
+           $state.go('tab.model');
+         }
+      });
         };
 
 
@@ -114,10 +125,11 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
             //writeConceptData('Shalin',concept);
             $scope.concept = "";
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Add Concept',
-                template: "Sure to Add " + concept + " concept?"
-            });
+         title: 'Add Concept',
+         template: 'Are you sure to Add Concept?'
+      });
 
+            
             confirmPopup.then(function (res) {
                 if (res) {
                     writeConceptData("Shalin", concept);
@@ -165,7 +177,7 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
         }
     })
 
-    .controller('InputCtrl', function ($scope, $stateParams) {
+    .controller('InputCtrl', function ($scope, $stateParams, $ionicPopup, $state) {
         $scope.$on('$ionicView.enter', function (e) {
             $scope.conceptList = [];
             GetAllConcepts("Shalin", function (data) {
@@ -197,6 +209,20 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
                 alert(input[i]);
             }
         }
+        
+        $scope.save=function(){
+        var confirmPopup = $ionicPopup.confirm({
+         title: 'Add Input',
+         template: 'Are you sure to Add Input?'
+      });
+
+      confirmPopup.then(function(res) {
+         if(res) {
+           alert("Input Added Successfuly");
+           $state.go('tab.model');
+         }
+      });
+}
         $scope.OnAdd = function (model) {
 
         }
@@ -259,6 +285,22 @@ var app = angular.module('starter.controllers', ['ionic', 'ngCordova', 'googlech
             $scope.chart = {};
             $scope.chart.type = "BarChart";
             localStorage.setItem("prediction", results[0].name);
+            
+//            var service_url = 'https://kgsearch.googleapis.com/v1/entities:search?query=' + results[0].name + '&limit=1&key=AIzaSyBXIgU_8ov_uiEpjBscNOr5axYwoyjr3yY';
+//            var params = {
+//                'query': results[0].name,
+//                'limit': 1,
+//                'indent': true,
+//                'key' : 'AIzaSyBXIgU_8ov_uiEpjBscNOr5axYwoyjr3yY',
+//            };
+//            
+//            $scope.knowledge = function() {
+//                $http.get(service_url).then(function(response) {
+//                    var kt = document.getElementById('knowledgeText');
+//                    kt.innerText = response.itemListElement['result']['detailedDescription']['articleBody'];
+//                    localStorage.setItem("knowledgeText", kt);
+//                });
+//            };
             
             $scope.chart.data = {
                 "cols": [
